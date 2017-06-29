@@ -4,6 +4,7 @@ class Product(models.Model):
     """docstring for Product."""
     name = models.CharField(max_length=100)
     price = models.IntegerField()
+    stock = models.IntegerField()
 
     def __init__(self, arg):
         super(Product, self).__init__()
