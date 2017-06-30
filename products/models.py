@@ -10,5 +10,6 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    def get_all_products():
+    @classmethod
+    def get_all_products(cls):
         return Product.objects.all()
