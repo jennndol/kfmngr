@@ -10,6 +10,6 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    @classmethod
-    def get_all_products(cls):
+    @staticmethod
+    def get_all_products():
         return Product.objects.all()
