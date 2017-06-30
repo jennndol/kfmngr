@@ -9,6 +9,7 @@ class Buying(models.Model):
     quantity = models.IntegerField()
     price = models.IntegerField()
 
-    def __init__(self, arg):
-        super(Buying, self).__init__()
-        self.arg = arg
+    def __str__(self):
+        return self.id
+
+    # TODO: Create transaction between Buying and Product
