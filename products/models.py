@@ -10,5 +10,5 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    def get_all_products(self):
+    def get_all_products():
         return Product.objects.all()
