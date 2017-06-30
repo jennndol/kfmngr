@@ -9,3 +9,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_all_products(self):
+        return Product.objects.all()
