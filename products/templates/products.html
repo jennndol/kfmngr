@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 {% block title %} Products {% endblock %}
 {% block content %}
-<h1>Products</h1>
+<h1>Available Products</h1>
+<hr>
 {% for product in products %}
 <div class="col-md-4">
   <p>{{ product.name }}</p>
-  <button type="button" class="btn btn-success">Buy</button>
+  <p>Rp.{{ product.price }},00</p>
+  <details>
+    <summary>show detail</summary>
+    <hr>
+    <p>{{ product.detail }}</p>
+  </details>
 </div>
 {% endfor %}
 {% endblock %}
