@@ -5,7 +5,6 @@ class Supplier(models.Model):
     name = models.CharField(max_length=50)
     phone = models.CharField(max_length=16)
     address = models.CharField(max_length=50)
-    
-    def __init__(self, arg):
-        super(Supplier, self).__init__()
-        self.arg = arg
+
+    def __str__(self):
+        return self.name

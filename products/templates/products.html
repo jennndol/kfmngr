@@ -6,6 +6,11 @@
 {% for product in products %}
 <div class="col-md-4">
   <a href="/products/{{product.id}}"><b>{{ product.name }}</b></a>
+  {% if product.stock < 1 %}
+  <b style="color: red;">Sold Out</b>
+  {% else %}
+  <b>Available</b>
+  {% endif %}
   <p>Rp.{{ product.price }},00</p>
 </div>
 {% endfor %}
