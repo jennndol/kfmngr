@@ -7,6 +7,8 @@ class Product(models.Model):
     detail = models.CharField(max_length=100)
     weight = models.IntegerField(default=0)
     stock = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add = True, auto_now = False)
+    updated_at = models.DateTimeField(auto_now_add = False, auto_now = True)
 
     def __str__(self):
         return self.name
@@ -14,5 +16,3 @@ class Product(models.Model):
     @staticmethod
     def get_all_products():
         return Product.objects.all()
-
-    
