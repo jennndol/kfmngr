@@ -5,20 +5,3 @@ body {
   padding: 40px 15px;
   text-align: center;
 }
-
-summary {
-  display: block;
-}
-
-summary::-webkit-details-marker {
-  display: none;
-}
-
-summary::before {
-  content: '\25B6';
-  padding-right: 0.5em;
-}
-
-details[open] > summary::before {
-  content: '\25BC';
-}

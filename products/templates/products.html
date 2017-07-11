@@ -5,13 +5,8 @@
 <hr>
 {% for product in products %}
 <div class="col-md-4">
-  <p>{{ product.name }}</p>
+  <a href="/products/{{product.id}}"><b>{{ product.name }}</b></a>
   <p>Rp.{{ product.price }},00</p>
-  <details>
-    <summary>show detail</summary>
-    <hr>
-    <p>{{ product.detail }}</p>
-  </details>
 </div>
 {% endfor %}
 {% endblock %}
