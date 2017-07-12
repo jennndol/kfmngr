@@ -21,7 +21,7 @@ from transactions.views import buying
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^product/$', products),
-    url(r'^product/create/$', create),
+    url(r'^product/create/$', create, name='create_product'),
     url(r'^product/(?P<id>\d+)/$', product, name='product'),
     url(r'^transaction/$', buying, name='buying'),
 

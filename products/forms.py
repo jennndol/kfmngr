@@ -4,10 +4,10 @@ from products.models import Product
 
 class ProductForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100)
-    price = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}), max_length=12)
+    price = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     detail = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=500)
-    weight = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}), max_length=12)
-    stock = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}), max_length=12)
+    weight = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    stock = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Product

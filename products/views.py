@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from products.models import Product
+from products.forms import ProductForm
 
 def products(request):
     products = Product.get_all_products()
@@ -23,5 +24,5 @@ def create(request):
             product.save()
             return redirect('/transaction/')
     else:
-        form = ArticleForm()
+        form = ProductForm()
     return render(request, 'create.html', {'form': form})
