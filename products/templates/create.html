@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <form action="{% url 'create_product' %}" method="post" role="form">
   {% csrf_token %}
   {% for field in form %}
@@ -6,3 +8,4 @@
   {% endfor %}
   <input type="submit" name="" value="Save">
 </form>
+{% endblock %}
