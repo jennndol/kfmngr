@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from products.views import products, product
-from transactions.views import selling
+from transactions.views import buying
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

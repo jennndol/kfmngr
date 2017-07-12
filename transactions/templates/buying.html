@@ -1,1 +1,22 @@
-include
+{% extends 'base.html' %}
+{% block title %}
+Procurement
+{% endblock %}
+
+{% block content %}
+<h1>Procurement</h1>
+<hr>
+<div class="col-md-8" style="background: grey;">
+  <ol>
+  {% for product in products %}
+    <li>
+      {{product.name}}
+    </li>
+  {% endfor %}
+  </ol>
+  <!-- TODO: History -->
+</div>
+<div class="col-md-4" style="background: pink;">
+  For transaction with seller
+</div>
+{% endblock %}

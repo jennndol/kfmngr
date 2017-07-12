@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from products.models import Product
 
 def buying(request):
-    return render(request, 'buying.html')
+    products = Product.get_all_products()
+    return render(request, 'buying.html', {'products':products})
