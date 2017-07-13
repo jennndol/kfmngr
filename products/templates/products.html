@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block stylesheet %}
+<style media="screen">
+  .form-group {
+    text-align: left;
+  }
+  .bordered{
+    border: 2px;
+    border-color: black;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<div class="col-md-3">
+  <form action="{% url 'products' %}" method="post" role="form">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="form-group{% if field.errors %} has-error{% endif %}">
+      <label for="{{ field.label }}" class="control-label">{{ field.label }}</label>
+      {% if field.label == 'Content' %}
+      {% include 'markdown_editor.html' with textarea='id_content' %}
+      {% endif %}
+      {{ field }}
+      {% if field.help_text %}
+      <span class="help-block">{{ field.help_text }}</span>
+      {% endif %}
+      {% for error in field.errors %}
+      <label class="control-label">{{ error }}</label>
+      {% endfor %}
+      </div>
+    {% endfor %}
+    <input type="submit" class="btn btn-block btn-success" name="" value="Save">
+  </form>
+</div>
+<div class="col-md-9" style="border-style: groove; padding: 2em;">
+  {% for product in products %}
+    <div class="col-md-4">
+      {{ product }}
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
