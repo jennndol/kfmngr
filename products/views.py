@@ -23,4 +23,4 @@ def products(request):
             return redirect('/product/')
     else:
         form = ProductForm()
-    return render(request, 'create.html', {'form': form, 'products': products})
+    return render(request, 'products.html', {'form': form, 'products': products})
