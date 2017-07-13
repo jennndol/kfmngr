@@ -9,6 +9,9 @@ def product(request, id):
 
 def products(request):
     products = Product.get_all_products()
+    return render(request, 'products.html', {'products': products})
+
+def create(request):
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
@@ -23,4 +26,4 @@ def products(request):
             return redirect('/product/')
     else:
         form = ProductForm()
-    return render(request, 'products.html', {'form': form, 'products': products})
+    return render(request, 'create_product.html', {'form': form})
