@@ -8,7 +8,8 @@ class ProductForm(forms.ModelForm):
     detail = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=500)
     weight = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     stock = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    sku = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100)
 
     class Meta:
         model = Product
-        fields = ['name', 'price', 'detail', 'weight', 'stock']
+        fields = ['name', 'price', 'detail', 'sku', 'weight', 'stock']
