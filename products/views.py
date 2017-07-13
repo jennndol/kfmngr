@@ -22,7 +22,7 @@ def create(request):
             product.weight = form.cleaned_data.get('weight')
             product.stock = form.cleaned_data.get('stock')
             product.save()
-            return redirect('/transaction/')
+            return redirect('/product/')
     else:
         form = ProductForm()
     return render(request, 'create.html', {'form': form})
