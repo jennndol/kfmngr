@@ -14,6 +14,9 @@ class Product(models.Model):
     def __str__(self):
         return str(self.name)
 
+    def get_stock_amount(self):
+        return str(self.stock) + str(" Kg")
+
     @staticmethod
     def get_all_products():
         return Product.objects.all()

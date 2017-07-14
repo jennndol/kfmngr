@@ -1,12 +1,27 @@
 {% extends 'base.html' %}
+{% block title %}Produk{% endblock %}
 {% block content %}
-<div class="col-md-9">
-  {% for product in products %}
-    <div class="col-xs-12" style="border-bottom:groove; padding: 1em;">
-      <img src="#" alt="" width="100%">
-      <a href="/product/{{product.id}}">{{product.name}}</a><br>
-      <label class="label label-primary">{{product.price}}</label>
-    </div>
-  {% endfor %}
-</div>
+  <h2>Produk yang dijual</h2>
+  <p>Berikut merupakan list nama produk yang dijual oleh <b style="color:grey; font-family: 'Arial'">Kunfayakun Rice Shop</b>, diantaranya dapat anda lihat di tabel berikut.</p>
+  <div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nama Barang</th>
+        <th>Harga / Kg</th>
+        <th>Stok</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>#</td>
+        <td title="{{product.name}}">{{ product|truncatechars:12 }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.get_stock_amount }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
