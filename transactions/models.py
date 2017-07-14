@@ -11,5 +11,8 @@ class Procurement(models.Model):
     created_at = models.DateTimeField(auto_now_add = True, auto_now = False)
     updated_at = models.DateTimeField(auto_now_add = False, auto_now = True)
 
+    def save(self, *args, **kwargs):
+        super(Procurement, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.product.name

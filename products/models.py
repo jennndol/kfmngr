@@ -11,11 +11,15 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add = True, auto_now = False)
     updated_at = models.DateTimeField(auto_now_add = False, auto_now = True)
 
+    def save(self, *args, **kwargs):
+        print('save method is being called')
+        super(Product, self).save(*args, **kwargs)
+
     def __str__(self):
         return str(self.name)
 
     def get_stock_amount(self):
-        return str(self.stock) + str(" Kg")
+        return str(self.stock) + " Kg"
 
     @staticmethod
     def get_all_products():
