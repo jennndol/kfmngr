@@ -12,8 +12,17 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now_add = False, auto_now = True)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     @staticmethod
     def get_all_products():
         return Product.objects.all()
+
+# TODO: price by weight
+class Price(models.Model):
+    product = models.ForeignKey(Product)
+    created_at = models.DateTimeField(auto_now_add = True, auto_now = False)
+    updated_at = models.DateTimeField(auto_now_add = False, auto_now = True)
+
+    def __str__(self):
+        pass

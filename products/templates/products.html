@@ -1,19 +1,8 @@
 {% extends 'base.html' %}
-{% block stylesheet %}
-<style media="screen">
-  .form-group {
-    text-align: left;
-  }
-  .bordered{
-    border: 2px;
-    border-color: black;
-  }
-</style>
-{% endblock %}
 {% block content %}
-<div class="col-md-9" style="border-style: solid; padding: 2em;background:#F0F0F0;">
+<div class="col-md-9">
   {% for product in products %}
-    <div class="col-md-4" style="padding-bottom: 1em;">
+    <div class="col-xs-12" style="border-bottom:groove; padding: 1em;">
       <img src="#" alt="" width="100%">
       <a href="/product/{{product.id}}">{{product.name}}</a><br>
       <label class="label label-primary">{{product.price}}</label>
