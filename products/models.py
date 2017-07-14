@@ -19,8 +19,10 @@ class Product(models.Model):
         return Product.objects.all()
 
 # TODO: price by weight
-class Price(models.Model):
+class PriceTag(models.Model):
     product = models.ForeignKey(Product)
+    weight = models.IntegerField(default=0)
+    sku = models.CharField(blank=True, null=True, max_length=10)
     created_at = models.DateTimeField(auto_now_add = True, auto_now = False)
     updated_at = models.DateTimeField(auto_now_add = False, auto_now = True)
 
