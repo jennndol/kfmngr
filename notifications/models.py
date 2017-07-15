@@ -6,6 +6,9 @@ class History(models.Model):
     created_at = models.DateTimeField(auto_now_add = True, auto_now = False)
     updated_at = models.DateTimeField(auto_now_add = False, auto_now = True)
 
+    class Meta:
+        verbose_name_plural = 'Histories'
+
     def __str__(self):
         return self.text
 
