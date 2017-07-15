@@ -2,6 +2,7 @@ from django.db import models
 from suppliers.models import Supplier
 from products.models import Product
 from django.contrib.auth.models import User
+from notifications.models import History
 
 class Procurement(models.Model):
     """docstring for Procurement."""
@@ -19,8 +20,8 @@ class Procurement(models.Model):
         print("before update : " + str(product.stock))
         product.stock = product.stock + self.quantity
         print("after update : " + str(product.stock))
-        # TODO: save logged in user into history table
-        print(self.user)
+        history = History.create('%s added %s Kg of %s that is sent by %s' % (self.user, self.quantity, self.product, self.supplier))
+        history.save()
         product.save()
         super(Procurement, self).save(*args, **kwargs)
 
