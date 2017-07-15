@@ -20,6 +20,7 @@ class Procurement(models.Model):
         product.stock = product.stock + self.quantity
         print("after update : " + str(product.stock))
         # TODO: save logged in user into history table
+        print(self.user)
         product.save()
         super(Procurement, self).save(*args, **kwargs)
 

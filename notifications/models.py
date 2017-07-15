@@ -8,3 +8,8 @@ class History(models.Model):
 
     def __str__(request):
         return self.text
+
+    @classmethod
+    def create(cls, text):
+        history = cls(text=text)
+        return history
