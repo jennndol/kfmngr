@@ -11,6 +11,7 @@
 </style>
 {% endblock %}
 {% block content %}
+<h2>Tambah Produk</h2>
 <form action="{% url 'create_product' %}" method="post" role="form">
   {% csrf_token %}
   {% for field in form %}
