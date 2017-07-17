@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from products.models import Product
+from transactions.models import Procurement
 
 def buying(request):
-    products = Product.get_all_products()
-    return render(request, 'buying.html', {'products':products})
+    procurements = Procurement.objects.all()
+    return render(request, 'buying.html', {'procurements':procurements})
