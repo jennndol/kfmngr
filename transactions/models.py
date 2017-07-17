@@ -34,7 +34,7 @@ class Selling(models.Model):
     updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
 
 class Detail(models.Model):
-    product = models.ForeignKey(Product)
+    product = models.ForeignKey(Product, related_name='+')
     quantity = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
