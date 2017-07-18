@@ -27,3 +27,21 @@ class Procurement(models.Model):
 
     def __str__(self):
         return self.product.name
+
+class Selling(models.Model):
+    buyer = models.CharField(max_length=50, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return '#' + str(self.pk) + ' - '+ self.buyer
+
+class Detail(models.Model):
+    selling = models.ForeignKey(Selling)
+    product = models.ForeignKey(Product, related_name='+')
+    quantity = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return self.product

@@ -1,5 +1,6 @@
 from django.db import models
 
+# TODO: product's price is separated by packing
 class Product(models.Model):
     """docstring for Product."""
     name = models.CharField(max_length=100)
