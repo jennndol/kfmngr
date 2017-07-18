@@ -22,7 +22,7 @@ def create(request):
             product.weight = form.cleaned_data.get('weight')
             product.stock = form.cleaned_data.get('stock')
             product.sku = form.cleaned_data.get('sku')
-            product.save()
+            product.save(request.user)
             return redirect('/product/')
     else:
         form = ProductForm()

@@ -12,6 +12,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now_add = False, auto_now = True)
 
     def save(self, *args, **kwargs):
+        # TODO: create history if product is created
         print('save method is being called')
         super(Product, self).save(*args, **kwargs)
 
