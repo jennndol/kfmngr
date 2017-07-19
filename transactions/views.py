@@ -24,3 +24,6 @@ def new_buying(request):
     return render(request, 'new_procurement.html', {'form':form})
 
 # TODO: make receipt procurement, one receipt for many products and one supplier
+
+def selling(request):
+    return render(request, 'selling.html')
