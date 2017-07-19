@@ -26,4 +26,9 @@ def new_buying(request):
 # TODO: make receipt procurement, one receipt for many products and one supplier
 
 def selling(request):
+    if request.method == 'POST':
+        form = SellingForm(request.POST):
+        if form.is_valid():
+            selling = Selling()
+            selling.buyer = form.cleaned_data('buyer')
     return render(request, 'selling.html')
