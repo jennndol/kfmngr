@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from transactions.models import Procurement, Selling
-from transactions.forms import ProcurementForm
-from transactions.forms import SellingForm
+from transactions.models import Procurement, Selling, Detail
+from transactions.forms import ProcurementForm, DetailForm,SellingForm
 
 def buying(request):
     procurements = Procurement.objects.all()
@@ -39,4 +38,15 @@ def selling(request):
 
 def selling_detail(request, id):
     selling = get_object_or_404(Selling, id=id)
-    return render(request, 'selling_detail.html', {'selling':selling})
+    if request.method == 'POST':
+        form = DetailForm(request.POST)
+        if form.is_valid():
+            ticket = Detail()
+            ticket.selling = selling
+            ticket.product = form.cleaned_data.get('product')
+            ticket.quantity = form.cleaned_data.get('quantity')
+            ticket.save()
+            return redirect(request.META['HTTP_REFERER'])
+    else:
+        form = DetailForm()
+    return render(request, 'selling_detail.html', {'selling':selling, 'form':form})
