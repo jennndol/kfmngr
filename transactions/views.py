@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from transactions.models import Procurement, Selling
 from transactions.forms import ProcurementForm
 from transactions.forms import SellingForm
