@@ -1,4 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
+<h2>Tambah Produk</h2>
+<form action="{% url 'selling' %}" method="post" role="form">
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="form-group{% if field.errors %} has-error{% endif %}">
+    <label for="{{ field.label }}" class="control-label">{{ field.label }}</label>
+    {% if field.label == 'Content' %}
+    {% include 'markdown_editor.html' with textarea='id_content' %}
+    {% endif %}
+    {{ field }}
+    {% if field.help_text %}
+    <span class="help-block">{{ field.help_text }}</span>
+    {% endif %}
+    {% for error in field.errors %}
+    <label class="control-label">{{ error }}</label>
+    {% endfor %}
+    </div>
+  {% endfor %}
+  <input type="submit" class="btn btn-block btn-success" name="" value="Save">
+</form>
 
 {% endblock %}
