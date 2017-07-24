@@ -36,3 +36,7 @@ def selling(request):
     else:
         form = SellingForm()
     return render(request, 'selling.html', {'form':form})
+
+def selling_detail(request, id):
+    selling = get_object_or_404(Selling, id=id)
+    return render(request, 'selling_detail.html', {'selling':selling})
