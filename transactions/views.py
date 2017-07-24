@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from transactions.models import Procurement
 from transactions.forms import ProcurementForm
+from transactions.forms import SellingForm
 
 def buying(request):
     procurements = Procurement.objects.all()
@@ -27,7 +28,7 @@ def new_buying(request):
 
 def selling(request):
     if request.method == 'POST':
-        form = SellingForm(request.POST):
+        form = SellingForm(request.POST)
         if form.is_valid():
             selling = Selling()
             selling.buyer = form.cleaned_data('buyer')
