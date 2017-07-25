@@ -29,6 +29,13 @@ class Procurement(models.Model):
         return self.product.name
 
 class Selling(models.Model):
+    PAID = 'PD'
+    UNPAID = 'UP'
+    CHOICES = (
+        (PAID, 'Paid'),
+        (UNPAID, 'Unpaid'),
+    )
+    status = models.CharField(max_length=2, choices=CHOICES, default=UNPAID)
     buyer = models.CharField(max_length=50, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
