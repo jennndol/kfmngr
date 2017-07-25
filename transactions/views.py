@@ -2,6 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from transactions.models import Procurement, Selling, Detail
 from transactions.forms import ProcurementForm, DetailForm,SellingForm
 
+def total(numbers):
+    total = 0
+    for number in numbers:
+        total = number + total
+    return total
+
 def buying(request):
     procurements = Procurement.objects.all()
     return render(request, 'buying.html', {'procurements':procurements})
@@ -39,7 +45,10 @@ def selling(request):
 def selling_detail(request, id):
     selling = get_object_or_404(Selling, id=id)
     tickets = selling.detail_set.all()
-    total = 0;
+    numbers = [1,2,3]
+    total = 0
+    total = total([1,2,3])
+    print(total)
     for i in tickets:
         total = total + i.subtotal()
     if request.method == 'POST':
