@@ -6,7 +6,11 @@ buyer {{selling.buyer}}
 {{ticket.product.name}}
 {{ticket.quantity}}
 {{ticket.subtotal}}
+<br>
+
 {% endfor %}
+<br>
+Total belanja : {{total}}
 <form action="{% url 'selling_detail' selling.id %}" method="post" role="form">
   {% csrf_token %}
   {% for field in form %}

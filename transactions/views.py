@@ -3,10 +3,10 @@ from transactions.models import Procurement, Selling, Detail
 from transactions.forms import ProcurementForm, DetailForm,SellingForm
 
 def total(numbers):
-    total = 0
+    x = 0
     for number in numbers:
-        total = number + total
-    return total
+        x = number + x
+    return x
 
 def buying(request):
     procurements = Procurement.objects.all()
@@ -45,12 +45,11 @@ def selling(request):
 def selling_detail(request, id):
     selling = get_object_or_404(Selling, id=id)
     tickets = selling.detail_set.all()
-    numbers = [1,2,3]
-    total = 0
-    total = total([1,2,3])
-    print(total)
-    for i in tickets:
-        total = total + i.subtotal()
+
+    subtotals = []
+    for ticket in tickets:
+        subtotals.append(ticket.subtotal())
+
     if request.method == 'POST':
         form = DetailForm(request.POST)
         if form.is_valid():
@@ -62,4 +61,4 @@ def selling_detail(request, id):
             return redirect(request.META['HTTP_REFERER'])
     else:
         form = DetailForm()
-    return render(request, 'selling_detail.html', {'selling':selling, 'form':form})
+    return render(request, 'selling_detail.html', {'selling':selling, 'form':form, 'total': total(subtotals)})
