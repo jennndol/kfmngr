@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Procurement, Selling
+from .models import Procurement, Selling, Detail
 
 
 class ProcurementForm(forms.ModelForm):
@@ -13,3 +13,8 @@ class SellingForm(forms.ModelForm):
     class Meta:
         model = Selling
         fields = ['buyer']
+
+class DetailForm(forms.ModelForm):
+    class Meta:
+        model = Detail
+        fields = ['product', 'quantity']
