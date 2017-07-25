@@ -5,7 +5,7 @@ buyer {{selling.buyer}}
 {% for ticket in selling.detail_set.all %}
 {{ticket.product.name}}
 {{ticket.quantity}}
-{{ ticket.quantity|multiply:ticket.product.price }}
+{{ticket.subtotal}}
 {% endfor %}
 <form action="{% url 'selling_detail' selling.id %}" method="post" role="form">
   {% csrf_token %}

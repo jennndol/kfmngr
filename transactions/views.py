@@ -38,6 +38,10 @@ def selling(request):
 
 def selling_detail(request, id):
     selling = get_object_or_404(Selling, id=id)
+    tickets = selling.detail_set.all()
+    total = 0;
+    for i in tickets:
+        total = total + i.subtotal()
     if request.method == 'POST':
         form = DetailForm(request.POST)
         if form.is_valid():
