@@ -1,4 +1,10 @@
+{% extends 'base.html' %}
 {% load transaction %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
 Transaction number {{selling.id}}
 buyer {{selling.buyer}}
 <h2>Tambah Produk</h2>
@@ -16,9 +22,6 @@ Total belanja : {{total}}
   {% for field in form %}
     <div class="form-group{% if field.errors %} has-error{% endif %}">
     <label for="{{ field.label }}" class="control-label">{{ field.label }}</label>
-    {% if field.label == 'Content' %}
-    {% include 'markdown_editor.html' with textarea='id_content' %}
-    {% endif %}
     {{ field }}
     {% if field.help_text %}
     <span class="help-block">{{ field.help_text }}</span>
@@ -28,5 +31,7 @@ Total belanja : {{total}}
     {% endfor %}
     </div>
   {% endfor %}
-  <input type="submit" class="btn btn-block btn-success" name="" value="Save">
+  <input type="submit" class="btn btn-block btn-success" name="" value="Add">
 </form>
+<a href="#" class="btn btn-default btn-block" style="margin-top: 0.5em;">Checkout</a>
+{% endblock %}
