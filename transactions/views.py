@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from transactions.models import Procurement
+from transactions.models import Procurement, Selling
 from transactions.forms import ProcurementForm
 from transactions.forms import SellingForm
 
@@ -32,4 +32,7 @@ def selling(request):
         if form.is_valid():
             selling = Selling()
             selling.buyer = form.cleaned_data('buyer')
-    return render(request, 'selling.html')
+            selling.save()
+    else:
+        form = SellingForm()
+    return render(request, 'selling.html', {'form':form})
