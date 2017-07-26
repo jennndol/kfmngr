@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load transaction %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+Transaction number {{penjualan.id}}
+buyer {{penjualan.pembeli}}
+<h2>Tambah Produk</h2>
+{% for item in penjualan.detilpenjualan_set.all %}
+{{item.produk.nama}}
+{{item.kuantitas}}
+{{item.subtotal}}
+<br>
+
+{% endfor %}
+<br>
+Total belanja : {{total}}
+<form action="{% url 'detil_penjualan' penjualan.id %}" method="post" role="form">
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="form-group{% if field.errors %} has-error{% endif %}">
+    <label for="{{ field.label }}" class="control-label">{{ field.label }}</label>
+    {{ field }}
+    {% if field.help_text %}
+    <span class="help-block">{{ field.help_text }}</span>
+    {% endif %}
+    {% for error in field.errors %}
+    <label class="control-label">{{ error }}</label>
+    {% endfor %}
+    </div>
+  {% endfor %}
+  <input type="submit" class="btn btn-block btn-success" name="" value="Add">
+</form>
+<a href="#" class="btn btn-default btn-block" style="margin-top: 0.5em;">Checkout</a>
+{% endblock %}

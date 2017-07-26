@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>{{produk.nama}}</h1>
+  <div class="col-md-4">
+    <img src="#" alt="" width="100%">
+  </div>
+  <div class="col-md-8">
+    Rp.{{produk.harga}},00-
+    <p>{{produk.detil}}</p>
+  </div>
+{% endblock %}
