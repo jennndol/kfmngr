@@ -15,16 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from products.views import products, product, create
-from transactions.views import buying, new_buying, selling, selling_detail
+from products.views import semua_produk, produk, tambah
+from transactions.views import semua_pengadaan, tambah_pengadaan, penjualan, detil_penjualan
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^product/$', products, name='products'),
-    url(r'^product/create/$', create, name='create_product'),
-    url(r'^product/(?P<id>\d+)/$', product, name='product'),
-    url(r'^buying/$', buying, name='buying'),
-    url(r'^buying/create/$', new_buying, name='new_buying'),
-    url(r'^selling/$', selling, name='selling'),
-    url(r'^selling/(?P<id>\d+)/$', selling_detail, name='selling_detail'),
+    url(r'^produk/$', semua_produk, name='semua_produk'),
+    url(r'^produk/tambah/$', tambah, name='tambah_produk'),
+    url(r'^produk/(?P<id>\d+)/$', produk, name='produk'),
+    url(r'^pengadaan/$', semua_pengadaan, name='semua_pengadaan'),
+    url(r'^pengadaan/tambah/$', tambah_pengadaan, name='tambah_pengadaan'),
+    url(r'^penjualan/$', penjualan, name='penjualan'),
+    url(r'^penjualan/(?P<id>\d+)/$', detil_penjualan, name='detil_penjualan'),
 ]

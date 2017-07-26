@@ -1,20 +1,20 @@
 from django import forms
 
-from .models import Procurement, Selling, Detail
+from .models import Pengadaan, Penjualan, DetilPenjualan
 
 
-class ProcurementForm(forms.ModelForm):
+class PengadaanForm(forms.ModelForm):
 
     class Meta:
-        model = Procurement
-        fields = ['product', 'supplier', 'quantity', 'price']
+        model = Pengadaan
+        fields = ['produk', 'pemasok', 'kuantitas', 'harga']
 
-class SellingForm(forms.ModelForm):
+class PenjualanForm(forms.ModelForm):
     class Meta:
-        model = Selling
-        fields = ['buyer']
+        model = Penjualan
+        fields = ['pembeli']
 
-class DetailForm(forms.ModelForm):
+class DetilPenjualanForm(forms.ModelForm):
     class Meta:
-        model = Detail
-        fields = ['product', 'quantity']
+        model = DetilPenjualan
+        fields = ['produk', 'kuantitas']

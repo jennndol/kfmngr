@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Procurement, Selling, Detail
+from .models import Pengadaan, Penjualan, DetilPenjualan
 
-admin.site.register(Procurement)
-admin.site.register(Selling)
-admin.site.register(Detail)
+admin.site.register(Pengadaan)
+admin.site.register(Penjualan)
+admin.site.register(DetilPenjualan)

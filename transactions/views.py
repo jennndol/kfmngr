@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from transactions.models import Procurement, Selling, Detail
-from transactions.forms import ProcurementForm, DetailForm,SellingForm
+from transactions.models import Pengadaan, Penjualan, DetilPenjualan
+from transactions.forms import PengadaanForm, DetilPenjualanForm,PenjualanForm
 
 def total(numbers):
     x = 0
@@ -8,57 +8,57 @@ def total(numbers):
         x = number + x
     return x
 
-def buying(request):
-    procurements = Procurement.objects.all()
-    return render(request, 'buying.html', {'procurements':procurements})
+def semua_pengadaan(request):
+    semua_pengadaan = Pengadaan.objects.all()
+    return render(request, 'semua_pengadaan.html', {'semua_pengadaan':semua_pengadaan})
 
-def new_buying(request):
+def tambah_pengadaan(request):
     if request.method == 'POST':
-        form = ProcurementForm(request.POST)
+        form = PengadaanForm(request.POST)
         if form.is_valid():
-            procurement = Procurement()
-            procurement.product = form.cleaned_data.get('product')
-            procurement.supplier = form.cleaned_data.get('supplier')
-            procurement.quantity = form.cleaned_data.get('quantity')
-            procurement.price = form.cleaned_data.get('price')
-            procurement.user = request.user
-            procurement.save()
-            return redirect('/buying/')
+            pengadaan = Pengadaan()
+            pengadaan.product = form.cleaned_data.get('produk')
+            pengadaan.supplier = form.cleaned_data.get('pemasok')
+            pengadaan.quantity = form.cleaned_data.get('kuantitas')
+            pengadaan.price = form.cleaned_data.get('harga')
+            pengadaan.user = request.user
+            pengadaan.save()
+            return redirect('/pengadaan/')
 
     else:
-        form = ProcurementForm()
-    return render(request, 'new_procurement.html', {'form':form})
+        form = PengadaanForm()
+    return render(request, 'tambah_pengadaan.html', {'form':form})
 
-# TODO: make receipt procurement, one receipt for many products and one supplier
+# TODO: make receipt pengadaan, one receipt for many products and one supplier
 
-def selling(request):
+def penjualan(request):
     if request.method == 'POST':
-        form = SellingForm(request.POST)
+        form = PenjualanForm(request.POST)
         if form.is_valid():
-            selling = Selling()
-            selling.buyer = form.cleaned_data.get('buyer')
-            selling.save()
+            penjualan = Penjualan()
+            penjualan.pembeli = form.cleaned_data.get('pembeli')
+            penjualan.save()
     else:
-        form = SellingForm()
-    return render(request, 'selling.html', {'form':form})
+        form = PenjualanForm()
+    return render(request, 'penjualan.html', {'form':form})
 
-def selling_detail(request, id):
-    selling = get_object_or_404(Selling, id=id)
-    tickets = selling.detail_set.all()
+def detil_penjualan(request, id):
+    penjualan = get_object_or_404(Penjualan, id=id)
+    keranjang = penjualan.detilpenjualan_set.all()
 
-    subtotals = []
-    for ticket in tickets:
-        subtotals.append(ticket.subtotal())
+    semua_subtotal = []
+    for produk in keranjang:
+        semua_subtotal.append(produk.subtotal())
 
     if request.method == 'POST':
-        form = DetailForm(request.POST)
+        form = DetilPenjualanForm(request.POST)
         if form.is_valid():
-            ticket = Detail()
-            ticket.selling = selling
-            ticket.product = form.cleaned_data.get('product')
-            ticket.quantity = form.cleaned_data.get('quantity')
-            ticket.save()
+            detil_penjualan = DetilPenjualan()
+            detil_penjualan.penjualan = penjualan
+            detil_penjualan.produk = form.cleaned_data.get('produk')
+            detil_penjualan.kuantitas = form.cleaned_data.get('kuantitas')
+            detil_penjualan.save()
             return redirect(request.META['HTTP_REFERER'])
     else:
-        form = DetailForm()
-    return render(request, 'selling_detail.html', {'selling':selling, 'form':form, 'total': total(subtotals)})
+        form = DetilPenjualanForm()
+    return render(request, 'detil_penjualan.html', {'penjualan':penjualan, 'form':form, 'total': total(semua_subtotal)})

@@ -1,57 +1,57 @@
 from django.db import models
-from suppliers.models import Supplier
-from products.models import Product
+from suppliers.models import Pemasok
+from products.models import Produk
 from django.contrib.auth.models import User
 from notifications.models import History
 
-class Procurement(models.Model):
-    """docstring for Procurement."""
-    product = models.ForeignKey(Product)
-    supplier = models.ForeignKey(Supplier)
-    quantity = models.IntegerField(default=0)
-    price = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add = True, auto_now = False)
-    updated_at = models.DateTimeField(auto_now_add = False, auto_now = True)
+class Pengadaan(models.Model):
+    """docstring for Pengadaan."""
+    produk = models.ForeignKey(Produk)
+    pemasok = models.ForeignKey(Pemasok)
+    kuantitas = models.IntegerField(default=0)
+    harga = models.IntegerField(default=0)
+    dibuat_pada = models.DateTimeField(auto_now_add = True, auto_now = False)
+    diubah_pada = models.DateTimeField(auto_now_add = False, auto_now = True)
     user = models.ForeignKey(User)
 
     def save(self, *args, **kwargs):
-        print("Procurement save method is being called")
-        product = Product.objects.get(id=self.product.id)
-        print("before update : " + str(product.stock))
-        product.stock = product.stock + self.quantity
-        print("after update : " + str(product.stock))
+        print("Pengadaan save method is being called")
+        produk = Produk.objects.get(id=self.produk.id)
+        print("before update : " + str(produk.stok))
+        produk.stock = produk.stok + self.kuantitas
+        print("after update : " + str(produk.stok))
         history = History.create('%s added %s Kg of %s that is sent by %s' % (self.user, self.quantity, self.product, self.supplier))
         history.save()
         product.save()
-        super(Procurement, self).save(*args, **kwargs)
+        super(Pengadaan, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.product.name
+        return self.produk.nama
 
-class Selling(models.Model):
-    PAID = 'PD'
-    UNPAID = 'UP'
-    CHOICES = (
-        (PAID, 'Paid'),
-        (UNPAID, 'Unpaid'),
+class Penjualan(models.Model):
+    SUDAH = 'SD'
+    BELUM = 'BL'
+    PILIHAN = (
+        (SUDAH, 'Sudah dibayar'),
+        (BELUM, 'Belum dibayar'),
     )
-    status = models.CharField(max_length=2, choices=CHOICES, default=UNPAID)
-    buyer = models.CharField(max_length=50, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
+    status = models.CharField(max_length=2, choices=PILIHAN, default=BELUM)
+    pembeli = models.CharField(max_length=50, blank=True, null=True)
+    dibuat_pada = models.DateTimeField(auto_now_add=True, auto_now=False)
+    diubah_pada = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
-        return '#' + str(self.pk) + ' - '+ self.buyer
+        return '#' + str(self.pk) + ' - '+ self.pembeli
 
-class Detail(models.Model):
-    selling = models.ForeignKey(Selling)
-    product = models.ForeignKey(Product, related_name='+')
-    quantity = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
+class DetilPenjualan(models.Model):
+    penjualan = models.ForeignKey(Penjualan)
+    produk = models.ForeignKey(Produk, related_name='+')
+    kuantitas = models.IntegerField()
+    dibuat_pada = models.DateTimeField(auto_now_add=True, auto_now=False)
+    diubah_pada = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
-        return self.product.name
+        return self.produk.nama
 
     def subtotal(self):
-        return self.quantity * self.product.price
+        return self.kuantitas * self.produk.harga

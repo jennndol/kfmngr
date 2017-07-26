@@ -1,15 +1,15 @@
 from django import forms
 
-from products.models import Product
+from products.models import Produk
 
-class ProductForm(forms.ModelForm):
-    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100)
-    price = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    detail = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=500)
-    weight = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    stock = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+class ProdukForm(forms.ModelForm):
+    nama = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100)
+    harga = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    detil = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=500)
+    berat = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    stok = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
     sku = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=100)
 
     class Meta:
-        model = Product
-        fields = ['name', 'price', 'detail', 'sku', 'weight', 'stock']
+        model = Produk
+        fields = ['nama', 'harga', 'detil', 'sku', 'berat', 'stok']

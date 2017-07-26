@@ -1,29 +1,29 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from products.models import Product
-from products.forms import ProductForm
+from products.models import Produk
+from products.forms import ProdukForm
 
-def product(request, id):
-    product = get_object_or_404(Product, id=id)
-    return render(request, 'product.html', {'product':product})
+def produk(request, id):
+    produk = get_object_or_404(Produk, id=id)
+    return render(request, 'produk.html', {'produk':produk})
 
-def products(request):
-    products = Product.get_all_products()
-    return render(request, 'products.html', {'products': products})
+def semua_produk(request):
+    semua_produk = Produk.get_semua_produk()
+    return render(request, 'semua_produk.html', {'semua_produk': semua_produk})
 
-def create(request):
+def tambah(request):
     if request.method == 'POST':
-        form = ProductForm(request.POST)
+        form = ProdukForm(request.POST)
         if form.is_valid():
-            product = Product()
-            product.name = form.cleaned_data.get('name')
-            product.price = form.cleaned_data.get('price')
-            product.detail = form.cleaned_data.get('detail')
-            product.weight = form.cleaned_data.get('weight')
-            product.stock = form.cleaned_data.get('stock')
-            product.sku = form.cleaned_data.get('sku')
-            product.save(request.user)
-            return redirect('/product/')
+            produk = Produk()
+            produk.nama = form.cleaned_data.get('nama')
+            produk.harga = form.cleaned_data.get('harga')
+            produk.detil = form.cleaned_data.get('detil')
+            produk.berat = form.cleaned_data.get('berat')
+            produk.stok = form.cleaned_data.get('stok')
+            produk.sku = form.cleaned_data.get('sku')
+            produk.save(request.user)
+            return redirect('/produk/')
     else:
-        form = ProductForm()
-    return render(request, 'create_product.html', {'form': form})
+        form = ProdukForm()
+    return render(request, 'tambah_produk.html', {'form': form})

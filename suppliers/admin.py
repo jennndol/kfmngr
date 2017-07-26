@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import Supplier
+from .models import Pemasok
 
-admin.site.register(Supplier)
+admin.site.register(Pemasok)
