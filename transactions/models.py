@@ -14,6 +14,9 @@ class Pengadaan(models.Model):
     diubah_pada = models.DateTimeField(auto_now_add = False, auto_now = True)
     user = models.ForeignKey(User)
 
+    class Meta:
+        verbose_name_plural = 'list pengadaan'
+
     def save(self, *args, **kwargs):
         print("Pengadaan save method is being called")
         produk = Produk.objects.get(id=self.produk.id)
