@@ -17,7 +17,7 @@
       {% for produk in semua_produk %}
       <tr>
         <td>#</td>
-        <td title="{{produk.nama}}">{{ product|truncatechars:12 }}</td>
+        <td title="{{produk.nama}}">{{ produk|truncatechars:12 }}</td>
         <td>{{ produk.harga }}</td>
         <td>{{ produk.get_jumlah_stok }}</td>
       </tr>

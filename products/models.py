@@ -12,6 +12,9 @@ class Produk(models.Model):
     dibuat_pada = models.DateTimeField(auto_now_add = True, auto_now = False)
     dibuat_pada = models.DateTimeField(auto_now_add = False, auto_now = True)
 
+    class Meta:
+        verbose_name_plural = 'list produk'
+
     def save(self, *args, **kwargs):
         # TODO: create history if product is created
         print('save method is being called')
