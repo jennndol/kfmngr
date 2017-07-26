@@ -56,6 +56,9 @@ class DetilPenjualan(models.Model):
     dibuat_pada = models.DateTimeField(auto_now_add=True, auto_now=False)
     diubah_pada = models.DateTimeField(auto_now_add=False, auto_now=True)
 
+    class Meta:
+        verbose_name_plural = 'list detil penjualan'
+
     def __str__(self):
         return self.produk.nama
 
