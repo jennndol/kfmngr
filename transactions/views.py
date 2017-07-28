@@ -29,7 +29,8 @@ def tambah_pengadaan(request):
 # TODO: make receipt pengadaan, one receipt for many products and one supplier
 
 def detil_pengadaan(request, id):
-    pass
+    pengadaan = get_object_or_404(Pengadaan, id=id)
+    # TODO: add somthing
 
 def penjualan(request):
     if request.method == 'POST':

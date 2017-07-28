@@ -3,6 +3,7 @@ from suppliers.models import Pemasok
 from products.models import Produk
 from django.contrib.auth.models import User
 from notifications.models import History
+from django.contrib.humanize.templatetags.humanize import naturaltime
 
 class Pengadaan(models.Model):
     pemasok = models.ForeignKey(Pemasok)
@@ -13,6 +14,9 @@ class Pengadaan(models.Model):
     class Meta:
         verbose_name_plural = 'list pengadaan'
 
+    def __str__(self):
+        return naturaltime(self.dibuat_pada) + ' was supplied by ' + str(self.pemasok)
+
 class DetilPengadaan(models.Model):
     """docstring for Pengadaan."""
     produk = models.ForeignKey(Produk)
@@ -20,6 +24,9 @@ class DetilPengadaan(models.Model):
     harga = models.IntegerField(default=0)
     dibuat_pada = models.DateTimeField(auto_now_add = True, auto_now = False)
     diubah_pada = models.DateTimeField(auto_now_add = False, auto_now = True)
+
+    class Meta:
+        verbose_name_plural = 'list detail pengadaan'
 
     def hitung_modal(self):
         return ((self.kuantitas * self.harga) + (self.produk.modal * self.produk.stok))/(self.kuantitas + self.produk.stok)
@@ -31,10 +38,10 @@ class DetilPengadaan(models.Model):
         produk.modal = self.hitung_modal()
         produk.stok = produk.stok + self.kuantitas
         print("after update : " + str(produk.stok))
-        history = History.create('%s added %s Kg of %s that is sent by %s' % (self.user, self.kuantitas, self.produk, self.pemasok))
+        history = History.create('added %s Kg of %s' % (self.kuantitas, self.produk))
         history.save()
         produk.save()
-        super(Pengadaan, self).save(*args, **kwargs)
+        super(DetilPengadaan, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.produk.nama
