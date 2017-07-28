@@ -17,10 +17,7 @@ def tambah_pengadaan(request):
         form = PengadaanForm(request.POST)
         if form.is_valid():
             pengadaan = Pengadaan()
-            pengadaan.product = form.cleaned_data.get('produk')
-            pengadaan.supplier = form.cleaned_data.get('pemasok')
-            pengadaan.quantity = form.cleaned_data.get('kuantitas')
-            pengadaan.price = form.cleaned_data.get('harga')
+            pengadaan.pemasok = form.cleaned_data.get('pemasok')
             pengadaan.user = request.user
             pengadaan.save()
             return redirect('/pengadaan/')
@@ -30,6 +27,9 @@ def tambah_pengadaan(request):
     return render(request, 'tambah_pengadaan.html', {'form':form})
 
 # TODO: make receipt pengadaan, one receipt for many products and one supplier
+
+def detil_pengadaan(request, id):
+    pass
 
 def penjualan(request):
     if request.method == 'POST':

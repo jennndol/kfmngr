@@ -13,7 +13,7 @@ class Pengadaan(models.Model):
     class Meta:
         verbose_name_plural = 'list pengadaan'
 
-class DetailPengadaan(models.Model):
+class DetilPengadaan(models.Model):
     """docstring for Pengadaan."""
     produk = models.ForeignKey(Produk)
     kuantitas = models.IntegerField(default=0)

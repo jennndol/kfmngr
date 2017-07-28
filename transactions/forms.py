@@ -1,13 +1,17 @@
 from django import forms
 
-from .models import Pengadaan, Penjualan, DetilPenjualan
+from .models import Pengadaan, DetilPengadaan, Penjualan, DetilPenjualan
 
 
 class PengadaanForm(forms.ModelForm):
-
     class Meta:
         model = Pengadaan
-        fields = ['produk', 'pemasok', 'kuantitas', 'harga']
+        fields = ['pemasok']
+
+class DetilPengadaanForm(forms.ModelForm):
+    class Meta:
+        model = DetilPengadaan
+        fields = ['produk', 'kuantitas', 'harga']
 
 class PenjualanForm(forms.ModelForm):
     class Meta:
