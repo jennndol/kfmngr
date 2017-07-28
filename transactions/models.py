@@ -46,6 +46,8 @@ class DetilPengadaan(models.Model):
     def __str__(self):
         return self.produk.nama
 
+# TODO: make sure how to manage return products
+
 class Penjualan(models.Model):
     SUDAH = 'SD'
     BELUM = 'BL'
