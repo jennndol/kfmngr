@@ -15,7 +15,7 @@ class Pengadaan(models.Model):
         verbose_name_plural = 'list pengadaan'
 
     def __str__(self):
-        return naturaltime(self.dibuat_pada) + ' was supplied by ' + str(self.pemasok)
+        return naturaltime(self.dibuat_pada)
 
 class DetilPengadaan(models.Model):
     """docstring for Pengadaan."""
@@ -32,15 +32,15 @@ class DetilPengadaan(models.Model):
         return ((self.kuantitas * self.harga) + (self.produk.modal * self.produk.stok))/(self.kuantitas + self.produk.stok)
 
     def save(self, *args, **kwargs):
-        print("Pengadaan save method is being called")
-        produk = Produk.objects.get(id=self.produk.id)
-        print("before update : " + str(produk.stok))
-        produk.modal = self.hitung_modal()
-        produk.stok = produk.stok + self.kuantitas
-        print("after update : " + str(produk.stok))
-        history = History.create('added %s Kg of %s' % (self.kuantitas, self.produk))
-        history.save()
-        produk.save()
+        # print("Pengadaan save method is being called")
+        # produk = Produk.objects.get(id=self.produk.id)
+        # print("before update : " + str(produk.stok))
+        # produk.modal = self.hitung_modal()
+        # produk.stok = produk.stok + self.kuantitas
+        # print("after update : " + str(produk.stok))
+        # history = History.create('added %s Kg of %s' % (self.kuantitas, self.produk))
+        # history.save()
+        # produk.save()
         super(DetilPengadaan, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -87,3 +87,8 @@ class DetilPenjualan(models.Model):
 
     def subtotal(self):
         return self.kuantitas * self.harga_jual
+
+    def save(self, *args, **kwargs):
+        self.harga_jual = self.produk.harga
+        self.laba = (self.produk.harga - self.produk.modal) * self.kuantitas
+        super(DetilPenjualan, self).save(*args, **kwargs)
