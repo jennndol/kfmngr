@@ -5,17 +5,21 @@ from django.contrib.auth.models import User
 from notifications.models import History
 
 class Pengadaan(models.Model):
-    """docstring for Pengadaan."""
-    produk = models.ForeignKey(Produk)
     pemasok = models.ForeignKey(Pemasok)
-    kuantitas = models.IntegerField(default=0)
-    harga = models.IntegerField(default=0)
     dibuat_pada = models.DateTimeField(auto_now_add = True, auto_now = False)
     diubah_pada = models.DateTimeField(auto_now_add = False, auto_now = True)
     user = models.ForeignKey(User)
 
     class Meta:
         verbose_name_plural = 'list pengadaan'
+
+class DetailPengadaan(models.Model):
+    """docstring for Pengadaan."""
+    produk = models.ForeignKey(Produk)
+    kuantitas = models.IntegerField(default=0)
+    harga = models.IntegerField(default=0)
+    dibuat_pada = models.DateTimeField(auto_now_add = True, auto_now = False)
+    diubah_pada = models.DateTimeField(auto_now_add = False, auto_now = True)
 
     def hitung_modal(self):
         return ((self.kuantitas * self.harga) + (self.produk.modal * self.produk.stok))/(self.kuantitas + self.produk.stok)
@@ -34,9 +38,6 @@ class Pengadaan(models.Model):
 
     def __str__(self):
         return self.produk.nama
-
-class DetailPengadaan(models.Model):
-    pass
 
 class Penjualan(models.Model):
     SUDAH = 'SD'
