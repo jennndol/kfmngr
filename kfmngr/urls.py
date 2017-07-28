@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from products.views import semua_produk, produk, tambah
-from transactions.views import semua_pengadaan, tambah_pengadaan, penjualan, detil_penjualan
+from transactions.views import semua_pengadaan, tambah_pengadaan, penjualan, detil_penjualan, bayar
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^pengadaan/tambah/$', tambah_pengadaan, name='tambah_pengadaan'),
     url(r'^penjualan/$', penjualan, name='penjualan'),
     url(r'^penjualan/(?P<id>\d+)/$', detil_penjualan, name='detil_penjualan'),
+    url(r'^penjualan/(?P<id>\d+)/bayar/$', bayar, name='bayar'),
 ]

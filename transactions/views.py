@@ -44,7 +44,7 @@ def penjualan(request):
 
 def detil_penjualan(request, id):
     penjualan = get_object_or_404(Penjualan, id=id)
-    keranjang = penjualan.detilpenjualan_set.all()
+    keranjang = penjualan.list_produk()
 
     semua_subtotal = []
     for produk in keranjang:
@@ -56,9 +56,13 @@ def detil_penjualan(request, id):
             detil_penjualan = DetilPenjualan()
             detil_penjualan.penjualan = penjualan
             detil_penjualan.produk = form.cleaned_data.get('produk')
+            detil_penjualan.harga_jual = detil_penjualan.produk.harga
             detil_penjualan.kuantitas = form.cleaned_data.get('kuantitas')
             detil_penjualan.save()
             return redirect(request.META['HTTP_REFERER'])
     else:
         form = DetilPenjualanForm()
     return render(request, 'detil_penjualan.html', {'penjualan':penjualan, 'form':form, 'total': total(semua_subtotal)})
+
+def bayar(request, id):
+    return render(request, 'bayar.html')

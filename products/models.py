@@ -4,6 +4,7 @@ from django.db import models
 class Produk(models.Model):
     """docstring for Product."""
     nama = models.CharField(max_length=100)
+    modal = models.IntegerField(default=0)
     harga = models.IntegerField(default=0)
     berat = models.IntegerField(default=0)
     stok = models.IntegerField(default=0)
