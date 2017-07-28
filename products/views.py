@@ -18,10 +18,8 @@ def tambah(request):
             produk = Produk()
             produk.nama = form.cleaned_data.get('nama')
             produk.harga = form.cleaned_data.get('harga')
-            produk.detil = form.cleaned_data.get('detil')
             produk.berat = form.cleaned_data.get('berat')
             produk.stok = form.cleaned_data.get('stok')
-            produk.sku = form.cleaned_data.get('sku')
             produk.save(request.user)
             return redirect('/produk/')
     else:
