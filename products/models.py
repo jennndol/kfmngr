@@ -5,7 +5,6 @@ class Produk(models.Model):
     """docstring for Product."""
     nama = models.CharField(max_length=100)
     harga = models.IntegerField(default=0)
-    detil = models.CharField(max_length=100)
     berat = models.IntegerField(default=0)
     sku = models.CharField(blank=True, null=True, max_length=10)
     stok = models.IntegerField(default=0)
