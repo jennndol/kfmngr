@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+Procurement
+{% endblock %}
+
+{% block content %}
+  {% for pengadaan in semua_pengadaan %}
+    <a href="#">
+      {{ pengadaan.dibuat_pada }}
+    </a>
+  {% endfor %}
+{% endblock %}

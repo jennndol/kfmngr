@@ -12,6 +12,10 @@ def semua_pengadaan(request):
     semua_pengadaan = Pengadaan.objects.all()
     return render(request, 'semua_pengadaan.html', {'semua_pengadaan':semua_pengadaan})
 
+def pengadaan(request, id):
+    pengadaan = get_object_or_404(Pengadaan, id=id)
+    return render(request, 'pengadaan.html', {'pengadaan':pengadaan})
+
 def tambah_pengadaan(request):
     if request.method == 'POST':
         form = PengadaanForm(request.POST)
@@ -28,9 +32,6 @@ def tambah_pengadaan(request):
 
 # TODO: make receipt pengadaan, one receipt for many products and one supplier
 
-def detil_pengadaan(request, id):
-    pengadaan = get_object_or_404(Pengadaan, id=id)
-    # TODO: add somthing
 
 def penjualan(request):
     if request.method == 'POST':
