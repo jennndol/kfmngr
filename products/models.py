@@ -28,3 +28,10 @@ class Produk(models.Model):
     @staticmethod
     def get_semua_produk():
         return Produk.objects.all()
+
+class BeratLiter(models.Model):
+    produk = models.ForeignKey(Produk)
+    berat = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.produk.nama

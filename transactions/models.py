@@ -32,7 +32,7 @@ class DetilPengadaan(models.Model):
         return ((self.kuantitas * self.harga) + (self.produk.modal * self.produk.stok))/(self.kuantitas + self.produk.stok)
 
     def save(self, *args, **kwargs):
-        # print("Pengadaan save method is being called")
+        print("Pengadaan save method is being called")
         # produk = Produk.objects.get(id=self.produk.id)
         # print("before update : " + str(produk.stok))
         # produk.modal = self.hitung_modal()
@@ -72,7 +72,6 @@ class Penjualan(models.Model):
 class DetilPenjualan(models.Model):
     penjualan = models.ForeignKey(Penjualan)
     produk = models.ForeignKey(Produk, related_name='+')
-    # TODO: default=0 have to be erased after the project finish
     harga_jual = models.IntegerField(default=0)
     kuantitas = models.IntegerField()
     laba = models.IntegerField(default=0)
