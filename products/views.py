@@ -25,3 +25,7 @@ def tambah(request):
     else:
         form = ProdukForm()
     return render(request, 'tambah_produk.html', {'form': form})
+
+def stok_managemen(request):
+    produk_list = Produk.objects.all()
+    return render(request, 'stok-managemen.html', {'produk_list': produk_list})

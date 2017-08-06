@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+<<<<<<< HEAD
 from products.views import semua_produk, produk, tambah
 from transactions.views import semua_pengadaan, tambah_pengadaan, penjualan, detil_penjualan, bayar, pengadaan
+=======
+from products.views import semua_produk, produk, tambah, stok_managemen
+from transactions.views import semua_pengadaan, tambah_pengadaan, penjualan, detil_penjualan, bayar
+>>>>>>> fca3109e374868c15c0bd7c69a98a3a8a9c3974e
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,4 +34,5 @@ urlpatterns = [
     url(r'^penjualan/$', penjualan, name='penjualan'),
     url(r'^penjualan/(?P<id>\d+)/$', detil_penjualan, name='detil_penjualan'),
     url(r'^penjualan/(?P<id>\d+)/bayar/$', bayar, name='bayar'),
+    url(r'^stok/$', stok_managemen),
 ]
